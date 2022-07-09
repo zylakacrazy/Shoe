@@ -1,0 +1,51 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Template.master.cs" Inherits="Shoe.Views.Template" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="../Services/dinhdang.css" rel="stylesheet" />
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div style="text-align:center;background-color:aquamarine">
+        Header
+        <hr />
+        <a href="GioHang.aspx">Giỏ hàng</a>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+          </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <%  Shoe.ServiceShoe sv = new Shoe.ServiceShoe();
+                                    var result = sv.HienThiLoaiSanPham();
+                                    foreach (var item in result)
+                                    {
+                                        var result1 = item.TenLSP;
+                                        var result2 = item.Id;
+                                        %><li><a class="dropdown-item" href="default.aspx?idlsp=<% Response.Write(result2); %>"><% Response.Write(result1); %></a></li><%
+                                    }
+                     %>  
+                </ul>
+       </div>
+    </div>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <%----------Content------------%>
+    <div style="text-align:center;background-color:darkgray">
+        <hr />
+        Footer
+    </div>
+</body>
+
+</html>
